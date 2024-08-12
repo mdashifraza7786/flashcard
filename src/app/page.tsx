@@ -1,8 +1,9 @@
 "use client"
+
+import { useRouter } from "next/router";
+
 export default function Home() {
-  window.location.href = "/user";
-  return (
-    <>
-    </>
-  );
+  const router=useRouter();
+  router.push("/user");
+  return;
 }

@@ -1,6 +1,6 @@
 import mysql, { RowDataPacket } from 'mysql2/promise';
-
-
+import { config } from 'dotenv';
+config({ path: '.env.local' });
 export async function dbConnect() {
     try {
         const host = process.env.DB_HOST;
