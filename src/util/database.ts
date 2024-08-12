@@ -4,11 +4,11 @@ config({ path: '.env.local' });
 export async function dbConnect() {
     try {
         const connection = await mysql.createConnection({
-            host: 'database-3.c3w6uyiiyfss.us-east-1.rds.amazonaws.com',  // AWS RDS endpoint
-            port: 3306,
-            user: 'admin', 
-            password: 't6ATvka8JF7DPyRMt9uE',
-            database: 'db_eazylearning',
+            host: HOST,  // AWS RDS endpoint
+            port: PORT,
+            user: USERNAME, 
+            password: PASSWORD,
+            database: DATABASE,
         });
         return connection;
     } catch (error) {
