@@ -7,13 +7,11 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     try {
         const connection = await dbConnect();
 
-        // Delete associated questions
         await connection.execute(
             'DELETE FROM questions WHERE topicId = ?',
             [id]
         );
 
-        // Delete the topic
         await connection.execute(
             'DELETE FROM topics WHERE id = ?',
             [id]

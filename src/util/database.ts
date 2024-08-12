@@ -1,14 +1,12 @@
 import mysql, { RowDataPacket } from 'mysql2/promise';
-import { config } from 'dotenv';
-config({ path: '.env.local' });
 export async function dbConnect() {
     try {
         const connection = await mysql.createConnection({
-            host: 'database-3.c3w6uyiiyfss.us-east-1.rds.amazonaws.com',  // AWS RDS endpoint
+            host: '',
             port: 3306,
-            user: 'admin', 
-            password: 't6ATvka8JF7DPyRMt9uE',
-            database: 'db_eazylearning',
+            user: '', 
+            password: '',
+            database: '',
         });
         return connection;
     } catch (error) {
@@ -18,23 +16,8 @@ export async function dbConnect() {
 }
 
 
-// Function to execute SQL commands
-export async function executeSqlCommand(sqlCommand: string, params: any[] = []) {
-    const connection = await dbConnect();
-    try {
-        const [rows] = await connection.query<RowDataPacket[]>(sqlCommand, params);
-        return rows;
-    } catch (error: any) {
-        console.error('Error executing SQL command:', error);
-        throw error;
-    } finally {
-        await connection.end();
-    }
-}
 
 
-
-// Function to get user by email
 export async function getUserByUserid(email: string) {
     const connection = await dbConnect();
     try {
@@ -52,7 +35,6 @@ export async function getUserByUserid(email: string) {
     }
 }
 
-// Function to get all members
 export async function getMembers() {
     const connection = await dbConnect();
     try {

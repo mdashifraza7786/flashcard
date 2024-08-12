@@ -16,7 +16,6 @@ a{
   @apply text-supporting2;
 }
 
-/* Custom CSS for Flashcard Flip */
 .flashcard-container {
   perspective: 1000px;
 }

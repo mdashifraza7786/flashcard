@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect, FormEvent } from 'react';
-import axios from 'axios';  // Import Axios
+import axios from 'axios'; 
 import { MdDeleteForever, MdEdit } from "react-icons/md";
-import { Bars } from 'react-loader-spinner'; // Import a loader component or use any other loader
+import { Bars } from 'react-loader-spinner'; 
 
 const Admin: React.FC = () => {
     const [activeTab, setActiveTab] = useState<'add' | 'view'>('add');
@@ -18,19 +18,18 @@ const Admin: React.FC = () => {
     const [editIndex, setEditIndex] = useState<number | null>(null);
     const [editedTopicTitle, setEditedTopicTitle] = useState<string>('');
     const [editedQuestions, setEditedQuestions] = useState<{ question: string; answer: string }[]>([]);
-    const [loading, setLoading] = useState<boolean>(false); // Loading state
+    const [loading, setLoading] = useState<boolean>(false); 
 
-    // Fetch topics on component mount
     useEffect(() => {
         const fetchTopics = async () => {
-            setLoading(true); // Set loading to true before the request
+            setLoading(true); 
             try {
                 const response = await axios.get('/api/topics');
                 setTopicsList(response.data);
             } catch (error) {
                 console.error("Error fetching topics:", error);
             } finally {
-                setLoading(false); // Set loading to false after the request is done
+                setLoading(false); 
             }
         };
 
@@ -56,7 +55,6 @@ const Admin: React.FC = () => {
         event.preventDefault();
 
         if (editIndex !== null) {
-            // Update existing topic (PUT request)
             try {
                 const topicId = topicsList[editIndex].id;
                 const response = await axios.put(`/api/updatetopic/${topicId}`, {
@@ -72,7 +70,6 @@ const Admin: React.FC = () => {
                 console.error("Error updating topic:", error);
             }
         } else {
-            // Add new topic (POST request)
             try {
                 const response = await axios.post('/api/createtopic', {
                     topicTitle,
@@ -84,7 +81,6 @@ const Admin: React.FC = () => {
             }
         }
 
-        // Reset state
         setTopicTitle('');
         setQuestions([{ question: '', answer: '' }]);
     };

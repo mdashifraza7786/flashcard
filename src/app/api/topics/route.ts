@@ -8,7 +8,6 @@ export async function GET() {
     try {
         connection = await dbConnect();
 
-        // Fetch topics
         const [topics] = await connection.execute('SELECT * FROM topics');
 
         const [questions] = await connection.execute('SELECT * FROM questions');
