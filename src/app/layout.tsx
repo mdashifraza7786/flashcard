@@ -17,8 +17,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <NextTopLoader color="#67e8f9" showSpinner={false} crawl={false} />
-        <div className="flex">
-          <div className="w-[22rem] shadow-[0_0_3px_1px_#212121] h-screen">
+        <div className="flex flex-1">
+          <div className="w-[22rem] shadow-[0_0_3px_1px_#212121] sticky top-0 left-0">
             <SideBar/>
           </div>
           <div className="w-full flex flex-col gap-10">

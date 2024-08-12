@@ -2,7 +2,7 @@ import Link from "next/link"
 
 const SideBar = () => {
     return (
-        <div className="py-5 px-4 flex flex-col gap-10 sticky top-0 left-0 ">
+        <div className="py-5 px-4 flex flex-col gap-10 sticky top-0 left-0 h-screen">
             <div>
                 <h1 className="text-2xl uppercase font-bold text-center">
                     <span className="text-[#E90074]">EAZY</span> <span className="text-white">LEARN</span>

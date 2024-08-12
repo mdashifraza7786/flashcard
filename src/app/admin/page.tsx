@@ -2,6 +2,7 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import axios from 'axios';  // Import Axios
 import { MdDeleteForever, MdEdit } from "react-icons/md";
+import { Bars } from 'react-loader-spinner'; // Import a loader component or use any other loader
 
 const Admin: React.FC = () => {
     const [activeTab, setActiveTab] = useState<'add' | 'view'>('add');
@@ -17,15 +18,19 @@ const Admin: React.FC = () => {
     const [editIndex, setEditIndex] = useState<number | null>(null);
     const [editedTopicTitle, setEditedTopicTitle] = useState<string>('');
     const [editedQuestions, setEditedQuestions] = useState<{ question: string; answer: string }[]>([]);
+    const [loading, setLoading] = useState<boolean>(false); // Loading state
 
     // Fetch topics on component mount
     useEffect(() => {
         const fetchTopics = async () => {
+            setLoading(true); // Set loading to true before the request
             try {
                 const response = await axios.get('/api/topics');
                 setTopicsList(response.data);
             } catch (error) {
                 console.error("Error fetching topics:", error);
+            } finally {
+                setLoading(false); // Set loading to false after the request is done
             }
         };
 
@@ -92,7 +97,6 @@ const Admin: React.FC = () => {
         setQuestions(topicToEdit.questions);
         setActiveTab('add');
     };
-    
 
     const handleDelete = async (index: number) => {
         const topicId = topicsList[index].id;
@@ -185,7 +189,18 @@ const Admin: React.FC = () => {
 
             {activeTab === 'view' && (
                 <div className="flex flex-col gap-4">
-                    {topicsList.length === 0 ? (
+                    {loading ? (
+                        <div className="flex justify-center items-center h-64">
+                            <Bars
+                                height="80"
+                                width="80"
+                                color="#ffffff"
+                                ariaLabel="bars-loading"
+                                wrapperStyle={{}}
+                                wrapperClass=""
+                            />
+                        </div>
+                    ) : topicsList.length === 0 ? (
                         <p>No topics available</p>
                     ) : (
                         topicsList.map((topic, index) => (
