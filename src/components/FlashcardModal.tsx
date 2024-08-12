@@ -13,7 +13,6 @@ const FlashcardModal = ({ title, questions, onClose }: FlashcardModalProps) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [isFlipped, setIsFlipped] = useState(false);
 
-    console.log(questions)
     const handleFlashcardClick = () => {
         setIsFlipped(!isFlipped);
     };
@@ -36,7 +35,7 @@ const FlashcardModal = ({ title, questions, onClose }: FlashcardModalProps) => {
             </div>
             <div className="w-full p-5 rounded-lg shadow-lg relative flex gap-2 items-center justify-center">
                 <IoIosArrowDropleftCircle
-                    className="text-6xl cursor-pointer"
+                    className={`text-6xl cursor-pointer ${currentQuestion === 0 ? 'invisible' : ''}`}
                     onClick={handlePreviousClick}
                 />
                 <div
@@ -47,19 +46,18 @@ const FlashcardModal = ({ title, questions, onClose }: FlashcardModalProps) => {
                 >
                     <div className="flashcard">
                         <div className="front px-10 relative">
-                            <h2 className="absolute top-10 font-semibold text-cyan-300">Question no. {currentQuestion+1}</h2>
+                            <h2 className="absolute top-10 font-semibold text-cyan-300">Question no. {currentQuestion + 1}</h2>
                             {questions[currentQuestion].question}
                             <p className="text-gray-400 absolute bottom-5 left-1/2 text-sm -translate-x-1/2 -translate-y-1/2">Click me to see answer</p>
                         </div>
                         <div className="back px-10 relative">
-                        <h2 className="absolute top-10 font-semibold text-cyan-300">Answer</h2>
-
+                            <h2 className="absolute top-10 font-semibold text-cyan-300">Answer</h2>
                             {questions[currentQuestion].answer}
                         </div>
                     </div>
                 </div>
                 <IoIosArrowDroprightCircle
-                    className="text-6xl cursor-pointer"
+                    className={`text-6xl cursor-pointer ${currentQuestion === questions.length - 1 ? 'invisible' : ''}`}
                     onClick={handleNextClick}
                 />
             </div>
