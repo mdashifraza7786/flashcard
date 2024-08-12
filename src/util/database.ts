@@ -3,22 +3,12 @@ import { config } from 'dotenv';
 config({ path: '.env.local' });
 export async function dbConnect() {
     try {
-        const host = process.env.DB_HOST;
-        const port = process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : undefined;
-        const user = process.env.DB_USER;
-        const password = process.env.DB_PASSWORD;
-        const database = process.env.DB_NAME;
-
-        if (!host || !port || !user || !password || !database) {
-            throw new Error('Missing required environment variables');
-        }
-
         const connection = await mysql.createConnection({
-            host,
-            port,
-            user,
-            password,
-            database,
+            host: 'database-3.c3w6uyiiyfss.us-east-1.rds.amazonaws.com',  // AWS RDS endpoint
+            port: 3306,
+            user: 'admin', 
+            password: 't6ATvka8JF7DPyRMt9uE',
+            database: 'db_eazylearning',
         });
         return connection;
     } catch (error) {
@@ -26,6 +16,7 @@ export async function dbConnect() {
         throw error;
     }
 }
+
 
 // Function to execute SQL commands
 export async function executeSqlCommand(sqlCommand: string, params: any[] = []) {

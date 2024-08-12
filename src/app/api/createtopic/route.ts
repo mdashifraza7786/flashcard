@@ -22,7 +22,7 @@ export async function POST(req: Request) {
         );
         await Promise.all(questionPromises);
 
-        return NextResponse.json({ id: topicId, topicTitle, questions }, { status: 201 });
+        return NextResponse.json(result);
     } catch (error) {
         console.error('Error creating topic:', error);
         return NextResponse.json({ message: 'Error creating topic', error }, { status: 500 });
