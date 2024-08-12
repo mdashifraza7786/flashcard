@@ -1,14 +1,5 @@
 import mysql, { RowDataPacket } from 'mysql2/promise';
 
-// Database configuration
-const dbConfig = {
-    host: 'localhost', 
-    user: 'root',  
-    password: '',
-    database: 'eazylearning',
-};
-
-// Function to connect to the database
 
 export async function dbConnect() {
     try {
